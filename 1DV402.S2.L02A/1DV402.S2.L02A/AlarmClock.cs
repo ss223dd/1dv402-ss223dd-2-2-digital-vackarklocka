@@ -23,7 +23,7 @@ namespace _1DV402.S2.L02A
             {
                 if (value < 0 || value > 23)
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Alarmtimmen är inte i intervallet 0-23.");
                 }
                 _alarmHour = value;
             }
@@ -36,7 +36,7 @@ namespace _1DV402.S2.L02A
             {
                 if (value < 0 || value > 59)
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Alarmminuten är inte i intervallet 0-59.");
                 }
                 _alarmMinute = value;
             }
@@ -49,7 +49,7 @@ namespace _1DV402.S2.L02A
             {
                 if (value < 0 || value > 23)
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Timmen är inte i intervallet 0-23.");
                 }
                 _hour = value;
             }
@@ -62,7 +62,7 @@ namespace _1DV402.S2.L02A
             {
                 if (value < 0 || value > 59)
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Minuten är inte i intervallet 0-59.");
                 }
                 _minute = value;
             }
@@ -90,10 +90,10 @@ namespace _1DV402.S2.L02A
         // The only constructor where assigning values to the fields is allowed within its body.
         public AlarmClock(int hour, int minute, int alarmHour, int alarmMinute)
         {
-            _hour = hour;
-            _minute = minute;
-            _alarmHour = alarmHour;
-            _alarmMinute = alarmMinute;
+            Hour = hour;
+            Minute = minute;
+            AlarmHour = alarmHour;
+            AlarmMinute = alarmMinute;
         }
         
         // Method being called to make the clock turn one minute. If the new time complies to the time of the alarm, the method should return "true", otherwise "false".
@@ -102,18 +102,35 @@ namespace _1DV402.S2.L02A
         // No "Console.Write(Line)'s" allowed in this method.
         public bool TickTock()
         {
-            return false;
+            _minute++;
+
+            if (_minute > 59)
+            {
+                _minute = 0; _hour++;
+
+                if (_hour > 23)
+                {
+                    _hour = 0;
+                }
+            }
+            
+            if (_hour == _alarmHour && _minute == _alarmMinute)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         
         // Method which task is to return a string representing the value of an instance of the AlarmClock class (an object).
         // In case the value of the hour is only ONE(1) integer/digit, it should be presented WITHOUT THE COMMENCING ZERO.
         // However if the minute value is just one digit - the commencing zero should be presented.
         // No "Console.Write(Line)'s" allowed in this method.
-        public string ToString()
+        public override string ToString()
         {
-            return ("yo!");
+            return (string.Format("{0,3}:{1:d2} ({2}:{3:d2})", _hour, _minute, _alarmHour, _alarmMinute));
         }
-    
     }
-
 }
