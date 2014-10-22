@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace _1DV402.S2.L02A
 {
+    /// <summary>
+    /// This class is responsible for testing the AlarmClock class, verifying that its members have been correctly implemented 
+    /// by running a total of 7 tests, in which different AlarmClock-objects are being instantiated and used to test the constructors, 
+    /// properties and methods respectively. Furthermore, the class will also present the results of the tests, including any potential 
+    /// error messages being thrown.
+    /// </summary>
     class Program
     {
-        /// <summary>
-        /// This class is responsible for testing the AlarmClock class, verifying that its members have been correctly implemented 
-        /// by running a total of 7 tests, in which different AlarmClock-objects are being instantiated and used to test the constructors, 
-        /// properties and methods respectively. Furthermore, the class will also present the results of the tests, including any potential 
-        /// error messages being thrown.
-        /// </summary>
-
         private static string HorizontalLine = "═══════════════════════════════════════════════════════════════════════════════";
         
         private static void Main(string[] args)
@@ -142,7 +141,7 @@ namespace _1DV402.S2.L02A
 
             for (int i = 0; i < minutes; i++)
             {
-                if (ac.TickTock() == true)
+                if (ac.TickTock())
                 {
                     Console.BackgroundColor = ConsoleColor.DarkBlue;
                     Console.ForegroundColor = ConsoleColor.White;

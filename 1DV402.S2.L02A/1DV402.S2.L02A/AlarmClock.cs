@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace _1DV402.S2.L02A
 {
+    /// <summary>
+    /// Class verifying that an "AlarmClock-object" is correctly initialized with valid values, making the clock turn one minute (whilst checking if the new time
+    /// complies to the time of the alarm) and returns a string-representation of an AlarmClock instance.
+    /// </summary>
     class AlarmClock
     {
-        /// <summary>
-        /// Class verifying that an "AlarmClock-object" is correctly initialized with valid values, making the clock turn one minute (whilst checking if the new time
-        /// complies to the time of the alarm) and returns a string-representation of an AlarmClock instance.
-        /// </summary>
         private int _alarmHour;
         private int _alarmMinute;
         private int _hour;
@@ -91,26 +91,25 @@ namespace _1DV402.S2.L02A
         
         public bool TickTock()
         {
-            _minute++;
-
-            if (_minute > 59)
+            if (_minute < 59)
             {
-                _minute = 0; _hour++;
-
-                if (_hour > 23)
+                _minute++;
+            }
+            else
+            {
+                _minute = 0;
+                if (_hour < 23)
+                {
+                    _hour++;
+                }
+                else
                 {
                     _hour = 0;
                 }
             }
-            
-            if (_hour == _alarmHour && _minute == _alarmMinute)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+
+            return _hour == _alarmHour && _minute == _alarmMinute;
+
         }
         
         public override string ToString()
